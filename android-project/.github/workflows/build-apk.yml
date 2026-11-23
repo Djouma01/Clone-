@@ -1,0 +1,44 @@
+name: Compiler APK Android (DJOUMA CLONE)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    name: Build APK Debug & Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code source
+        uses: actions/checkout@v4
+
+      - name: Configurer Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Configurer Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Installer Gradle 8.9 et compiler l'APK
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Générer app-debug.apk
+        run: gradle assembleDebug --no-daemon
+
+      - name: Générer app-release-unsigned.apk
+        run: gradle assembleRelease --no-daemon
+
+      - name: Publier l'APK téléchargeable
+        uses: actions/upload-artifact@v4
+        with:
+          name: DJOUMA-CLONE-APK
+          path: |
+            app/build/outputs/apk/debug/app-debug.apk
+            app/build/outputs/apk/release/app-release-unsigned.apk
+          retention-days: 30

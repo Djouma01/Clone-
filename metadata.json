@@ -1,0 +1,8 @@
+{
+  "name": "DJOUMA CLONE",
+  "description": "Espace virtuel Android isolé (Kotlin + Android Work Profile) par DJOUMA COULIBALY : simulateur interactif, code source natif et compilation APK sur mobile.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
